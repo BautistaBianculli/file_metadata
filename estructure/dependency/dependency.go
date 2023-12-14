@@ -8,7 +8,7 @@ import (
 )
 
 type HandleContainer struct {
-	UploadFile entrypoints.Handler
+	Files entrypoints.FileHandler
 }
 
 func Start(env config.Config) *HandleContainer {
@@ -20,10 +20,10 @@ func Start(env config.Config) *HandleContainer {
 	fileClient := repository.NewFileRepository(AWSsession, env)
 
 	//useCases
-	useCases := usecases.NewUploadCases(fileClient)
+	useCases := usecases.NewFileCases(fileClient)
 
 	return &HandleContainer{
-		UploadFile: &entrypoints.Upload{UploadUseCase: useCases},
+		Files: &entrypoints.Files{FileUseCases: useCases},
 	}
 
 }

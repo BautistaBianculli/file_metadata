@@ -1,7 +1,16 @@
 package entrypoints
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/BautistaBianculli/metadata_archivos/src/core/entities"
+	"github.com/gin-gonic/gin"
+)
 
-type Handler interface {
-	Handle(c *gin.Context)
+type FileHandler interface {
+	UploadHandle(c *gin.Context)
+	GetAllHandler(c *gin.Context)
+	GetOneHandler(c *gin.Context)
+}
+
+type Files struct {
+	FileUseCases entities.FileUseCases
 }

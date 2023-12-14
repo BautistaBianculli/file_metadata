@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	apiUploadPrefix = "/api/upload"
+	apiUploadPrefix = "/api/file/"
 )
 
 func Init(server *gin.Engine, handlers *dependency.HandleContainer) {
@@ -17,6 +17,8 @@ func Init(server *gin.Engine, handlers *dependency.HandleContainer) {
 
 	initSwaggerEndpoint(server)
 	initUploadFileEndpoint(v1, handlers)
+	initGetAllFileEndpoint(v1, handlers)
+	initGetFileEndpoint(v1, handlers)
 }
 
 func initSwaggerEndpoint(rg *gin.Engine) {
@@ -25,5 +27,13 @@ func initSwaggerEndpoint(rg *gin.Engine) {
 }
 
 func initUploadFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleContainer) {
-	rg.POST("/file", handlers.UploadFile.Handle)
+	rg.POST("upload", handlers.Files.UploadHandle)
+}
+
+func initGetAllFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleContainer) {
+	rg.GET("", handlers.Files.GetAllHandler)
+}
+
+func initGetFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleContainer) {
+	rg.GET("get/:filename", handlers.Files.GetOneHandler)
 }
