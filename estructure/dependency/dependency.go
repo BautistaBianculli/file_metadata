@@ -17,7 +17,7 @@ func Start(env config.Config) *HandleContainer {
 
 	//repository
 	AWSsession := repository.NewAwsSession(env)
-	fileClient := repository.NewFileRepository(*AWSsession, env)
+	fileClient := repository.NewFileRepository(AWSsession, env)
 
 	//useCases
 	useCases := usecases.NewUploadCases(fileClient)
