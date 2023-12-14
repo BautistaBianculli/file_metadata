@@ -10,4 +10,5 @@ type FileRepository interface {
 	UploadFile(file multipart.File, header *multipart.FileHeader) (*s3manager.UploadOutput, error)
 	GetAllFiles() ([]*s3.Object, error)
 	GetOneFile(file *string) (string, error)
+	DeleteOneFile(file *string) error
 }

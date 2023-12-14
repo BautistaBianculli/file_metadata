@@ -9,6 +9,7 @@ type FileHandler interface {
 	UploadHandle(c *gin.Context)
 	GetAllHandler(c *gin.Context)
 	GetOneHandler(c *gin.Context)
+	DeleteOneHandler(c *gin.Context)
 }
 
 type Files struct {

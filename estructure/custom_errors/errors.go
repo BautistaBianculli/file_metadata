@@ -8,9 +8,13 @@ import (
 const (
 	CodeErrorInternalServer = "internal_error"
 	CodeErrorInvalidBody    = "invalid_body"
+	CodeErrorNotFound       = "not_found"
 
-	MessageErrorInternalServer = "internal server error on connect with %s"
+	MessageErrorInternalServer = "internal server error on %s"
 	MessageErrorParseError     = "error to parse response"
+	MessageErrorFileNotFound   = "error to find file %s"
+
+	CodeS3NotFound = "NotFound"
 )
 
 type ApiError struct {
@@ -40,6 +44,15 @@ func NewInternalServerError(code string, message string, detail string) error {
 func NewValidationError(code string, message string, detail string) error {
 	return &ApiError{
 		StatusCode: http.StatusBadRequest,
+		ErrorCode:  code,
+		Message:    message,
+		Detail:     detail,
+	}
+}
+
+func NewNotFoundError(code string, message string, detail string) error {
+	return &ApiError{
+		StatusCode: http.StatusNotFound,
 		ErrorCode:  code,
 		Message:    message,
 		Detail:     detail,

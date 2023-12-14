@@ -19,6 +19,7 @@ func Init(server *gin.Engine, handlers *dependency.HandleContainer) {
 	initUploadFileEndpoint(v1, handlers)
 	initGetAllFileEndpoint(v1, handlers)
 	initGetFileEndpoint(v1, handlers)
+	initDeleteFileEndpoint(v1, handlers)
 }
 
 func initSwaggerEndpoint(rg *gin.Engine) {
@@ -36,4 +37,8 @@ func initGetAllFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleCont
 
 func initGetFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleContainer) {
 	rg.GET("get/:filename", handlers.Files.GetOneHandler)
+}
+
+func initDeleteFileEndpoint(rg *gin.RouterGroup, handlers *dependency.HandleContainer) {
+	rg.DELETE("delete/:filename", handlers.Files.DeleteOneHandler)
 }
